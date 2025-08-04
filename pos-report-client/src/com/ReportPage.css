@@ -1,0 +1,96 @@
+.report-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  direction: rtl;
+  text-align: right;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls select,
+.controls button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.primary-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.primary-btn:hover {
+  background-color: #1976d2;
+}
+
+.store-name {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.report-table th,
+.report-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 15px;
+}
+.report-table th {
+  background-color: #f1f1f1;
+}
+
+.export-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.export-btn:hover {
+  background-color: #388e3c;
+}
+
+/* إخفاء عناصر معينة أثناء التصدير للطباعة */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 20px;
+  }
+  .controls select, .controls button, .export-btn {
+    width: 100%;
+  }
+}
