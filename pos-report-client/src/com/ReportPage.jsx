@@ -9,6 +9,7 @@ function ReportPage() {
   const [batches, setBatches] = useState([]);
   const reportRef = useRef(null);
 
+  
   useEffect(() => {
     axios.get('http://100.70.131.12:5000/stores')
       .then(res => setStores(res.data))
@@ -16,6 +17,10 @@ function ReportPage() {
   }, []);
 
   const fetchBatches = () => {
+    if (!selectedStoreId) {
+    alert("يرجى اختيار المخزن أولاً.");
+    return;
+  }
     if (selectedStoreId) {
       axios.get(`http://100.70.131.12:5000/batches/${selectedStoreId}`)
         .then(res => setBatches(res.data))
@@ -47,22 +52,33 @@ function ReportPage() {
     });
   };
 
-  const selectedStoreName = stores.find(s => s.id == selectedStoreId)?.name;
+  const selectedStoreName = stores.find(s => s.id === selectedStoreId)?.name;
 
   return (
     <div className="report-container" ref={reportRef}>
       <h2 className="title"> تقرير المخزن</h2>
 
       {/* تحديد المخزن */}
-      <div className="controls no-print">
-        <select onChange={e => setSelectedStoreId(e.target.value)} value={selectedStoreId}>
-          <option value="">اختر المخزن</option>
-          {stores.map(store => (
-            <option key={store.id} value={store.id}>{store.name}</option>
-          ))}
-        </select>
-        <button className="primary-btn" onClick={fetchBatches}>عرض التقرير</button>
-      </div>
+     <div className="controls no-print">
+  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <label htmlFor="storeSelect"><strong>اختر مخزن:</strong></label>
+    <select
+      id="storeSelect"
+      onChange={e => setSelectedStoreId(e.target.value)}
+      value={selectedStoreId}
+    >
+      <option value="" disabled>اختر من القائمة </option>
+      {stores.map(store => (
+        <option key={store.id} value={store.id}>{store.name}</option>
+      ))}
+    </select>
+  </div>
+
+  <button className="primary-btn" onClick={fetchBatches}>
+    عرض التقرير
+  </button>
+</div>
+
 
       {/* اسم المخزن المعروض */}
       {selectedStoreName && (
@@ -82,7 +98,7 @@ function ReportPage() {
             {batches.map((batch, index) => (
               <tr key={index}>
                 <td>{batch.item}</td>
-                <td>{batch.quantity}</td>
+                <td>{Number(batch.quantity ?? 0).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
