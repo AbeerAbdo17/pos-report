@@ -19,7 +19,7 @@ function SalesReport() {
     }
 
     try {
-      const res = await axios.get('http://100.70.131.12:5000/sales-report', {
+      const res = await axios.get('http://100.65.29.19:5000/sales-report', {
         params: {
           fdate: startDate.toISOString().split('T')[0],
           ldate: endDate.toISOString().split('T')[0],

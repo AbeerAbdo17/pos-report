@@ -11,7 +11,7 @@ function ReportPage() {
 
   
   useEffect(() => {
-    axios.get('http://100.70.131.12:5000/stores')
+    axios.get('http://100.65.29.19:5000/stores')
       .then(res => setStores(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -22,7 +22,7 @@ function ReportPage() {
     return;
   }
     if (selectedStoreId) {
-      axios.get(`http://100.70.131.12:5000/batches/${selectedStoreId}`)
+      axios.get(`http://100.65.29.19:5000/batches/${selectedStoreId}`)
         .then(res => setBatches(res.data))
         .catch(err => console.error(err));
     }
@@ -33,7 +33,6 @@ function ReportPage() {
       alert("لا يوجد بيانات للتصدير.");
       return;
     }
-
     const element = reportRef.current;
 
     const actionButtons = element.querySelectorAll('.no-print');

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ReportPage from './com/ReportPage';
 import SalesReport from './com/SalesReport';
 import AccountStatement from './com/AccountStatement';
+// import Dashboard from './com/Dashboard';
+
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
         direction: 'rtl'
       }}>
         <div>
-          <Link to="/" style={linkStyle}>تقرير المخزن</Link>
+          <Link to="/store-report" style={linkStyle}>تقرير المخزن</Link>
           <Link to="/sales" style={linkStyle}>تقرير المبيعات</Link>
           <Link to="/account-statement" style={linkStyle}>تقرير كشف حساب</Link> 
         </div>
@@ -27,7 +29,8 @@ function App() {
       {/* ✅ محتوى الصفحات */}
       <div style={{ padding: '20px' }}>
         <Routes>
-          <Route path="/" element={<ReportPage />} />
+          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="/store-report" element={<ReportPage />} />
           <Route path="/sales" element={<SalesReport />} />
           <Route path="/account-statement" element={<AccountStatement />} /> 
         </Routes>

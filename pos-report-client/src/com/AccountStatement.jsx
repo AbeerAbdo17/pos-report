@@ -20,7 +20,7 @@ function AccountStatement() {
   if (!inputValue) return;
 
   try {
-    const res = await axios.get('http://100.70.131.12:5000/accounts', {
+    const res = await axios.get('http://100.65.29.19:5000/accounts', {
       params: { search: inputValue }
     });
 
@@ -43,7 +43,7 @@ function AccountStatement() {
     }
 
     try {
-      const res = await axios.get('http://100.70.131.12:5000/account-statement', {
+      const res = await axios.get('http://100.65.29.19:5000/account-statement', {
         params: {
           sub_no: subNo,
           fdate: startDate.toISOString().split('T')[0],
