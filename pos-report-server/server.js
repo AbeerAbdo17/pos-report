@@ -1,20 +1,13 @@
+require('dotenv').config(); 
 const express = require('express');
-const mysql = require('mysql2/promise'); // مهم: عشان تقدر تستخدم await مع execute
 const cors = require('cors');
+const db = require('./db');
 
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// الاتصال بقاعدة البيانات
-const db = mysql.createPool({
-  host: '100.70.131.12',
-  user: 'vpnuser',
-  password: 'vpnpass',
-  database: 'posall'
-});
 
-// جلب كل المخازن
 app.get('/stores', async (req, res) => {
   try {
     const [results] = await db.query('SELECT * FROM store');
@@ -165,7 +158,8 @@ app.get('/accounts', async (req, res) => {
 });
 
 
-// تشغيل السيرفر
-app.listen(5000, '0.0.0.0', () => {
-  console.log('Server running on port 5000');
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
